@@ -3,6 +3,7 @@ const json = require('koa-json');
 const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const Router = require('koa-router');
+const YoutubeApi = require('./lib/youtube_api');
 
 const app = new Koa();
 
@@ -18,9 +19,18 @@ app.use(async (ctx, next) => {
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
+// routing
 const router = new Router();
+const youtubeApi = new YoutubeApi();
+
 router.get('/', ctx => {
     ctx.body = 'Hello Koa 2!';
+});
+
+router.get('/api/playlist/item', async ctx => {
+    const videoId = ctx.request.query.videoId;
+    const res = await youtubeApi.insertPaylistItem(videoId);
+    ctx.body = {message: 'success'};
 });
 
 app

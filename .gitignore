@@ -17,3 +17,5 @@ coverage/
 
 .env*
 !.env.default
+
+/token.json
