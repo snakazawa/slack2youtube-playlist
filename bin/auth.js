@@ -1,10 +1,9 @@
 require('dotenv').config();
 const readline = require('readline');
-const api = new (require('../lib/youtube_api'));
+const YoutubeApi = require('../lib/youtube_api');
+const api = new YoutubeApi();
 
 (async () => {
-
-
     const res = await authorize();
     console.log(res);
 
@@ -24,7 +23,7 @@ async function authorize () {
     return JSON.parse(res);
 }
 
-async function question () {
+async function question (text) {
     return new Promise(resolve => {
         const rl = readline.createInterface({
             input: process.stdin,
