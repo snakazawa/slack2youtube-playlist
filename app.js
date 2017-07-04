@@ -38,6 +38,7 @@ router.post('/api/slack/chat', async ctx => {
 
     if (!videoIds.length) { return; }
 
+    await youtubeApi.refresh();
     for (let id of videoIds) {
         await youtubeApi.insertPlaylistItem(id);
     }
